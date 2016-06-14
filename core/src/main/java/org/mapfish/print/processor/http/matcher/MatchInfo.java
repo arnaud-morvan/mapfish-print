@@ -60,7 +60,7 @@ public final class MatchInfo {
      *
      * @param scheme   the scheme to match.
      * @param host     the host to match.
-     * @param port     the host to match.
+     * @param port     the port to match.
      * @param path     the path to match.
      * @param fragment the fragment to match.
      * @param query    the query to match.
@@ -152,5 +152,48 @@ public final class MatchInfo {
 
     public String getRealm() {
         return this.realm;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+
+        if (this.realm != null) {
+            sb.append('\'');
+            sb.append(this.realm);
+            sb.append('\'');
+            sb.append(' ');
+        }
+        if (this.method != null) {
+            sb.append(this.method);
+            sb.append(' ');
+        }
+        if (this.scheme != null) {
+            sb.append(this.scheme);
+            sb.append("://");
+        }
+        if (this.host != null) {
+            sb.append(this.host);
+            if (this.port != -1) {
+                sb.append(':');
+                sb.append(this.port);
+            }
+        }
+        if (this.path != null) {
+            sb.append(this.path);
+        }
+        if (this.query != null) {
+            sb.append('?');
+            sb.append(this.query);
+        }
+        if (this.fragment != null) {
+            sb.append('#');
+            sb.append(this.fragment);
+        }
+
+        return sb.toString();
     }
 }
